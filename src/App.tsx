@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Cards from "./components/Cards/Cards";
+import CommonAddNew from "./components/CommonAddNew";
+const App: React.FC<{}> = () => {
+  const [categoryList, setCategoryList] = useState<JSX.Element[]>([]);
+  const [categoryIndex, setCategoryIndex] = useState(0);
 
-function App() {
+  const handleCreateNewList = (title: string) => {
+    setCategoryList(
+      categoryList.concat(<Cards key={categoryIndex} categoryTitle={title} />)
+    );
+    setCategoryIndex(categoryIndex + 1);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="heading">Dashboard</h1>
+      <div className="cards-wrapper">
+        {categoryList.map((card) => card)}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <CommonAddNew createList={handleCreateNewList} mode={"category"} />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

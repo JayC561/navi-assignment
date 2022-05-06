@@ -1,0 +1,11 @@
+.ticket-title,
+.category-title {
+  display: inline-block;
+  margin: 0;
+}
+
+.category-header,
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+}
